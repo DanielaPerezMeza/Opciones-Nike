@@ -9,7 +9,7 @@ Fecha de Generación: 17 de abril de 2026
 
 En este ejercicio analicé dos opciones europeas de la acción de Nike (NKE). Estudié cómo cambia su precio según el valor de la acción y el tiempo, usando también las griegas (Delta, Gamma, Theta, Vega y Rho) para entender su sensibilidad.
 Trabajé con datos reales del 17 de abril de 2026, donde la acción estaba en $46.06, y evalué tres momentos: 1 mes, 6 meses y el vencimiento (21 meses).
-Analicé una opción call con strike de $52.50, que está fuera del dinero (OTM), y una opción put con strike de $50.00, que está dentro del dinero.
+Analicé una opción call con strike de $52.50, que está fuera del dinero, y una opción put con strike de $50.00, que está dentro del dinero.
 vimos cómo influyen el tiempo, la volatilidad y el precio del activo en el valor de las opciones.
 
 DATOS DE MERCADO REALES (17/04/2026):
