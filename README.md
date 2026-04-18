@@ -7,10 +7,10 @@ Fecha de Generación: 17 de abril de 2026
 
 1. RESUMEN EJECUTIVO DEL ANÁLISIS
 
-Este documento presenta el análisis exhaustivo de dos opciones europeas sobre la 
-acción de Nike Inc. (NKE), cotizada en NYSE. Se han modelado las curvas de 
-convexidad (precio vs subyacente) y las 5 griegas (Delta, Gamma, Theta, Vega, 
-Rho) para escenarios temporales de 1 mes, 6 meses y vencimiento (mes 21).
+En este ejercicio analicé dos opciones europeas de la acción de Nike (NKE). Estudié cómo cambia su precio según el valor de la acción y el tiempo, usando también las griegas (Delta, Gamma, Theta, Vega y Rho) para entender su sensibilidad.
+Trabajé con datos reales del 17 de abril de 2026, donde la acción estaba en $46.06, y evalué tres momentos: 1 mes, 6 meses y el vencimiento (21 meses).
+Analicé una opción call con strike de $52.50, que está fuera del dinero (OTM), y una opción put con strike de $50.00, que está dentro del dinero.
+vimos cómo influyen el tiempo, la volatilidad y el precio del activo en el valor de las opciones.
 
 DATOS DE MERCADO REALES (17/04/2026):
 • Acción: NKE (Nike Inc.)
@@ -34,81 +34,82 @@ OPCIONES ANALIZADAS:
 2. ANÁLISIS DETALLADO DE TABLAS GENERADAS
 
 TABLA 1: SIMULACIÓN TEMPORAL MENSUAL
+
    <img width="743" height="275" alt="image" src="https://github.com/user-attachments/assets/eea03a0f-349f-4ebf-b464-5b1fce7d25ca" />
+
 Esta tabla define la evolución de los parámetros macroeconómicos y temporales 
 durante la vida de la opción.
 
 Observaciones Clave:
-• Mes 0 (Inicio): T=1.7262 años, SOFR=3.720%
-• Mes 6: T=1.2330 años, SOFR=3.700%
-• Mes 21 (Vencimiento): T=0.0000 años, SOFR=3.650%
-• La tasa SOFR decrece linealmente desde 3.72% hasta 3.65%, reflejando un 
-  escenario de política monetaria ligeramente expansiva o estabilizadora.
-• Los días hábiles restantes disminuyen proporcionalmente (435 → 0).
+En el inicio (mes 0), el tiempo al vencimiento es de 1.7262 años y la tasa SOFR es de 3.72%. A los 6 meses, el tiempo se reduce a 1.2330 años con una tasa de 3.70%, y al vencimiento (mes 21) el tiempo llega a 0, con una tasa de 3.65%.
+Vemos que la tasa SOFR disminuye de forma progresiva desde 3.72% hasta 3.65%, lo que sugiere un escenario de tasas ligeramente más bajas o estables en el tiempo.
+Por otro lado, los días hábiles restantes también disminuyen de manera proporcional, pasando de 435 días al inicio hasta 0 en el vencimiento.
 
 TABLA 2: CONVEXIDAD - OPCIÓN CALL
+
 <img width="519" height="187" alt="image" src="https://github.com/user-attachments/assets/c13ff4f8-5f4f-4e56-bc1d-80a6f1aa55ae" />
 
 Muestra la relación entre el precio del subyacente (S) y el precio teórico de 
 la opción Call.
 
 Análisis:
-• En S=$52.50 : Precio=$12.87 | Valor Temporal=$12.87 (100% del valor)
-• En S=$70.00 : Precio=$26.21 | Valor Temporal=$8.71 (33% del valor)
-• En S=$30.00 : Precio=$2.31 | Valor Intrínseco=$0.00
-• Se observa la asimetría positiva típica de las Calls: potencial de ganancia 
-  ilimitado a la derecha, pérdida limitada a la prima a la izquierda.
+Esta tabla muestra cómo varía el precio de la opción Call según el precio del subyacente.
+Cuando S = $52.50 (ATM), el precio ($12.87) corresponde totalmente a valor temporal. Si el precio sube a $70.00 (ITM), la opción aumenta a $26.21 y ya incluye valor intrínseco. En cambio, si baja a $30.00 (OTM), su valor es bajo ($2.31) y sin valor intrínseco.
+Se evidencia el comportamiento típico de una Call: ganancias potenciales altas al alza y pérdida limitada a la prima.
 
 TABLA 3: CONVEXIDAD - OPCIÓN PUT 
+
 <img width="523" height="165" alt="image" src="https://github.com/user-attachments/assets/8bc30cd2-7ccd-4a90-bb1c-35d5aa5738af" />
 
 Muestra la relación entre el precio del subyacente (S) y el precio teórico de 
 la opción Put.
 
 Análisis:
-• En S=$50.00 : Precio=$6.95 | Valor Temporal=$6.95
-• En S=$30.00 : Precio=$18.20 | Valor Intrínseco=$20.00
-• En S=$70.00 : Precio=$2.43 | Valor Temporal=$2.43
-• Nota: Se observa un valor temporal negativo teórico en S muy bajos ($18-$36), 
-  lo cual indica que el modelo Black-Scholes con la IV dada genera precios 
-  ligeramente por debajo del valor intrínseco en zonas de profundo ITM, un 
-  artefacto matemático común cuando la IV es baja para opciones muy ITM con 
-  mucho tiempo restante. En la práctica, el precio de mercado nunca sería menor 
-  al intrínseco.
+Cuando S = $50.00 (ATM), el precio es $6.95 y corresponde totalmente a valor temporal. Si el precio baja a $30.00 (ITM), la opción aumenta a $18.20, predominando el valor intrínseco. En cambio, cuando sube a $70.00 (OTM), el precio baja a $2.43 y solo tiene valor temporal.
+Se observa que en precios muy bajos de la acción aparece un valor temporal negativo, lo cual es un efecto del modelo teórico utilizado. Sin embargo, en la práctica, el precio de mercado no sería menor que su valor intrínseco.
 
 TABLAS 4-6: GRIEGAS CALL (Mes 1, Mes 6, Mes 21)
+
 <img width="688" height="178" alt="image" src="https://github.com/user-attachments/assets/34860dd7-5c1c-4cbf-9121-e0802cf48081" />
+
 
 <img width="688" height="159" alt="image" src="https://github.com/user-attachments/assets/69f418b1-4cbd-4c61-8106-1aed24b938bb" />
 
+
 <img width="687" height="175" alt="image" src="https://github.com/user-attachments/assets/510e9c52-e4ea-4da6-a66a-1c14eb78c62c" />
 
-• Mes 1: Delta transicional suave (0.008 a 0.98). Gamma máximo de 0.0201 cerca 
-  de S=$32-$34. Theta negativo moderado (-0.011).
-• Mes 6: Delta más inclinado. Gamma se concentra más cerca del Strike ($52.50). 
-  Theta se intensifica (-0.010).
-• Mes 21 (Vencimiento): Función escalón. Delta=1 para S>K, Delta=0 para S<K. 
-  Gamma, Theta, Vega y Rho son 0.0 en todo el rango, excepto en el punto 
-  exacto del strike donde son teóricamente infinitos (delta de Dirac).
+En el mes 1, el Delta cambia de forma gradual (de 0.008 a 0.98), el Gamma alcanza su punto máximo cerca de precios entre $32 y $34, y el Theta es negativo pero moderado.
+
+Para el mes 6, el Delta se vuelve más pronunciado, el Gamma se concentra más cerca del precio de ejercicio ($52.50) y el Theta sigue siendo negativo, con mayor efecto.
+
+En el vencimiento (mes 21), el comportamiento se vuelve tipo “escalón”: el Delta es 1 si el precio está por encima del strike y 0 si está por debajo. Las demás griegas tienden a cero en casi todos los puntos, excepto exactamente en el strike.
 
 TABLAS 7-9: GRIEGAS PUT (Mes 1, Mes 6, Mes 21)
+
 <img width="690" height="175" alt="image" src="https://github.com/user-attachments/assets/7162d378-ee21-4213-9836-82eeffa85342" />
+
 
 <img width="689" height="157" alt="image" src="https://github.com/user-attachments/assets/a4cd6e81-6f5b-40be-89d7-e69426befc5d" />
 
+
 <img width="688" height="112" alt="image" src="https://github.com/user-attachments/assets/73a7a3a5-facc-440f-8cd7-6d1ec6a5da85" />
 
-• Mes 1: Delta negativo (-0.98 a -0.01). Gamma simétrico a la Call pero 
-  desplazado al Strike de $50.00.
-• Mes 6: Comportamiento similar al mes 6 de la Call, con Delta acercándose a 
-  -1 o 0 más rápidamente según la dirección del mercado.
-• Mes 21: Delta=-1 para S<K, Delta=0 para S>K. El resto de griegas son 0.
+En el mes 1, el Delta es negativo (entre -0.98 y -0.01) y el Gamma presenta un comportamiento similar al de la Call, pero centrado en el strike de $50.00.
+
+En el mes 6, se mantiene un comportamiento parecido al de la Call, donde el Delta se acerca más rápido a -1 o a 0 dependiendo de si el precio baja o sube.
+
+En el vencimiento (mes 21), el Delta es -1 cuando el precio está por debajo del strike y 0 cuando está por encima. Las demás griegas toman valores cercanos a cero.
 
 3. ANÁLISIS VISUAL DE GRÁFICAS GENERADAS
 
 GRÁFICA 1: DASHBOARD COMPARATIVO CALL vs PUT
 
 <img width="1361" height="539" alt="image" src="https://github.com/user-attachments/assets/6a51eab0-1bd3-4b43-ab5f-06971f59435c" />
+
+La gráfica compara el comportamiento de la Call y la Put.
+La Call muestra una curva creciente que aumenta más rápido cuando sube el precio de la acción, mientras que la Put es descendente, con mayor valor cuando el precio es bajo. En ambos casos se marcan los precios de ejercicio.
+En el Delta, la Call va de 0 a 1 y la Put de -1 a 0, cambiando principalmente cerca del strike.
+En el Gamma, ambas tienen forma de campana, pero la Put es un poco más alta, lo que indica mayor sensibilidad cerca del precio de ejercicio.
 
 Panel Superior Izquierdo (Convexidad CALL):
 • Curva azul ascendente con forma de "hockey stick".
@@ -137,39 +138,39 @@ GRÁFICAS 2-4: GRIEGAS CALL (Mes 1, Mes 6, Mes 21)
 
 <img width="1362" height="542" alt="image" src="https://github.com/user-attachments/assets/58524317-ef9c-4edb-ad45-3c7211a3e588" />
 
+
 <img width="1365" height="521" alt="image" src="https://github.com/user-attachments/assets/d775325e-025a-4d20-9dbb-ddf8e3156f50" />
+
 
 <img width="1360" height="570" alt="image" src="https://github.com/user-attachments/assets/7af01236-24ff-4f4b-88b0-6d7bc818f28d" />
 
-• Mes 1: Las curvas son anchas y suaves. Vega alcanza su máximo (~0.25) cerca 
-  de S=$58, indicando que la opción es muy sensible a cambios en la 
-  volatilidad implícita en este horizonte.
-• Mes 6: Las curvas se estrechan. Gamma alcanza su pico (~0.025) más cerca del 
-  Strike $52.50. Theta se vuelve más pronunciado (pérdida de valor temporal 
-  más rápida).
-• Mes 21: Todas las curvas de griegas (Delta, Gamma, Theta, Vega, Rho) son 
-  líneas planas en 0 o 1. Esto confirma el comportamiento determinista al 
-  vencimiento: la opción vale max(S-K, 0). No hay incertidumbre (Vega=0), 
-  no hay tiempo que perder (Theta=0), no hay curvatura (Gamma=0).
+En el mes 1, las curvas son más suaves y amplias, y el Vega es alto, lo que indica mayor sensibilidad a la volatilidad.
+
+En el mes 6, las curvas se vuelven más estrechas, el Gamma se concentra cerca del strike y el Theta aumenta, reflejando una pérdida más rápida de valor en el tiempo.
+
+Al final del periodo (mes 21), todas las griegas se estabilizan, mostrando que el valor de la opción depende únicamente de si el precio está por encima o por debajo del strike.
 
 GRÁFICAS 5-7: GRIEGAS PUT (Mes 1, Mes 6, Mes 21)
 
 <img width="1362" height="545" alt="image" src="https://github.com/user-attachments/assets/cc536800-7d7b-4bd0-92b9-6b98d56fda36" />
 
+
 <img width="1362" height="556" alt="image" src="https://github.com/user-attachments/assets/c86cffc5-19fc-4aff-99e3-05267e8d5ae2" />
+
 
 <img width="1360" height="553" alt="image" src="https://github.com/user-attachments/assets/84929c2e-78ea-411a-a38d-1538e0e895db" />
 
-• Mes 1: Delta parte de -1 en S bajos y sube hacia 0. Gamma tiene su pico 
-  (~0.024) cerca de S=$38-$40, ligeramente por debajo del Strike $50, lo cual 
-  es consistente con el skew de volatilidad o la asimetría del modelo.
-• Mes 6: El pico de Gamma se desplaza y se hace más agudo cerca de S=$50. 
-  Theta es negativo (pérdida de valor) pero menos agresivo que en la Call 
-  OTM.
-• Mes 21: Comportamiento escalón inverso a la Call. Delta salta de -1 a 0 en 
-  S=$50.
+En el mes 1, el Delta empieza cerca de -1 cuando el precio es bajo y sube hacia 0. El Gamma alcanza su punto máximo un poco por debajo del strike.
+
+En el mes 6, el Gamma se concentra más cerca del precio de ejercicio y el Theta sigue siendo negativo, pero con menor impacto que en la Call.
+
+Al final del periodo (mes 21), el Delta cambia bruscamente de -1 a 0 justo en el nivel del strike.
 
 4. CONCLUSIONES MATEMÁTICAS Y FINANCIERAS
+
+En general, las opciones pierden valor con el paso del tiempo, y este efecto se intensifica a medida que se acerca el final del periodo. La sensibilidad del Delta (Gamma) es mayor cuando el precio está cerca del strike, lo que implica un mayor riesgo y necesidad de ajustes en ese punto.
+Al inicio, las opciones son más sensibles a cambios en la volatilidad, pero este efecto desaparece al final. Finalmente, la Call ofrece mayor potencial de ganancia en escenarios alcistas, mientras que la Put actúa como protección ante caídas, reflejando la forma en que el mercado valora estos riesgos.
+
 A. EVOLUCIÓN TEMPORAL (TIME DECAY):
 El Theta es negativo en ambos tipos de opción durante Mes 1 y Mes 6, lo que 
 confirma que el poseedor de la opción (posición larga) pierde valor temporal 
